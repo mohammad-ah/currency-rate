@@ -11,23 +11,24 @@ class Currency implements CurrencyService
 
     public function list()
     {
+        $this->fillAllCurrencies();
         $currencies = Currencies::all();
         return $currencies;
     }
 
     protected function fillAllCurrencies()
     {
-         $currencies = Currencies::all();
-         if(count($currencies) <= 0)
-         {
-             $currencies = collect($this->getJson($this->url));
-             if(count($currencies) > 0)
-             {
-                $currencies = $currencies['results'];
 
-                 foreach($currencies as $item)
+         $currencies = collect($this->getJson($this->url));
+         if(count($currencies) > 0)
+         {
+            $currencies = $currencies['results'];
+
+             foreach($currencies as $item)
+            {
+                $missing = Currencies::find($item->id);
+                if(!isset($missing))
                 {
-                    echo $item->currencyName;
                     $currency  = new Currencies;
                     $currency->name = $item->currencyName;
                     $currency->code = $item->id;
@@ -36,13 +37,10 @@ class Currency implements CurrencyService
                         $currency->symbol = $item->currencySymbol;
                     }
                     $currency->save();
-
                 }
-             }
-             return redirect('/currencies')->with('success', 'currencies filled');
-
-          }
-
+            }
+         }
+         return redirect('/currencies')->with('success', 'currencies filled');
     }
     protected function getJson($url)
     {
