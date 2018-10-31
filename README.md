@@ -1,4 +1,4 @@
-# laravel-task
+# currency-rate
 
 This project has two APIs:
 
@@ -7,7 +7,7 @@ currencies/ which will update the DB with all new currencies from the external A
 And return all available currencies as JSON
 
 And it has the command
-php artisan currencies:bootstrap which will do the same as the previous API
+php artisan currencies:bootstrap which will update the DB with all new currencies from the same external API
 
 It also has an API to update the currency if not updated for the last 5 min:
 
