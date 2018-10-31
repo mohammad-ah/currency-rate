@@ -2,7 +2,7 @@
 
 This project has two APIs:
 
-currencies/ which will update the DB with all new currencies from the external API: 
+**currencies/** which will update the DB with all new currencies from the external API: 
 > https://free.currencyconverterapi.com/api/v6/currencies
 
 And return all available currencies as JSON
@@ -15,7 +15,7 @@ which will update the DB with all new currencies from the same external API
 
 It also has an API to update the currency if not updated for the last 5 min:
 
-currencies/{currencyName}
+**currencies/{currencyName}**
 
 EX:
 currencies/ILS
